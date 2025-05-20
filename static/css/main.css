@@ -1,0 +1,14 @@
+body {
+    padding-top: 2rem;
+}
+
+.file-item {
+    margin-bottom: 0.5rem;
+}
+
+.extraction-result {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
