@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Box ZIP Files</h1>
+    <form id="extract-form" method="post">
+        <div class="form-actions mb-3">
+            <button type="submit" id="extract-btn" class="btn btn-primary" disabled>
+                Extract Selected Files
+            </button>
+        </div>
+
+        <div class="file-list">
+            {% for file in files %}
+            <div class="file-item form-check">
+                <input type="checkbox" name="file_ids" value="{{ file.id }}" class="form-check-input file-checkbox" id="file-{{ file.id }}">
+                <label for="file-{{ file.id }}" class="form-check-label">
+                    <div class="file-info">
+                        <div class="file-name">{{ file.name }}</div>
+                        <div class="file-meta">
+                            Size: {{ (file.size / 1024) | round(1) }} KB | Modified: {{ file.modified_at.strftime('%Y-%m-%d %H:%M') }}
+                        </div>
+                    </div>
+                </label>
+            </div>
+            {% else %}
+            <div class="no-files">No ZIP files found in your Box account.</div>
+            {% endfor %}
+        </div>
+    </form>
+
+    <div id="extraction-results" class="d-none mt-4">
+        <h2>Extraction Results</h2>
+        <div id="results-container"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/file-selector.js') }}"></script>
+{% endblock %}
+
